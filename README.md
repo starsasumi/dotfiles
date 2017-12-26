@@ -16,7 +16,7 @@
 
 - The step above above might fail with a message.
 
-  This is about overwriting dotfiles that exists already. Consider backup/remove them, and then rerun `dotfiles checkout`.
+  This is about overwriting dotfiles that exist already. Please rename/remove them, and then rerun `dotfiles checkout`.
 
 - Prevent git from showing untrack files in your home when you type `dotfiles status`
 
