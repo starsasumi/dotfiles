@@ -8,6 +8,8 @@ Plug 'scrooloose/nerdtree'
 Plug 'chriskempson/base16-vim'
 Plug 'junegunn/fzf'
 Plug 'tpope/vim-surround'
+Plug 'Valloric/YouCompleteMe'
+Plug 'tpope/vim-commentary'
 
 " Initialize plugin system
 call plug#end()
@@ -42,15 +44,13 @@ let g:airline_right_sep=''
 " Tags
 set tags=./.tags;,.tags
 
-" Use spaces instead of tabs
+" Use 2 spaces instead of tab for indention
 set expandtab
+set shiftwidth=2
+set softtabstop=2
 
 " Be smart when using tabs ;)
 set smarttab
-
-" 1 tab == 4 spaces
-set shiftwidth=4
-set tabstop=4
 
 " Linebreak on 500 characters
 set lbr
@@ -103,6 +103,18 @@ map <leader>tm :tabmove
 " Treat long lines as break lines (useful when moving around in them)
 map j gj
 map k gk
+
+" Buffers
+map <leader>bb :buffers<cr>
+map <leader>bo :b 
+map <leader>bd :bd 
+
+" Clipboard
+map <leader>cc "*
+
+" Marks
+map <leader>ms :marks<cr>
+map <leader>md :delmarks 
 
 " Toggle NerdTree
 map <C-\> :NERDTreeToggle<cr>
