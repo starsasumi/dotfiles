@@ -20,7 +20,7 @@
 
 - Prevent git from showing untrack files in your home when you type `dotfiles status`
 
-      dotfiels config --local status.showUntrackedFiles no
+      dotfiles config --local status.showUntrackedFiles no
 
 ## Usage
 
