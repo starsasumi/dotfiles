@@ -22,6 +22,11 @@
 
       dotfiles config --local status.showUntrackedFiles no
 
+- (Optional) Set your username and email.
+
+      dotfiles config user.name "<name>"
+      dotfiles config user.email "<email>"
+
 ## Usage
 
 With the setop about, you can manege your dotfiles with command `dotfiles`. `dotfiles` is a git alias that works with the bare repository `~/.dotfiles`.
