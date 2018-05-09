@@ -10,6 +10,8 @@ Plug 'junegunn/fzf'
 Plug 'tpope/vim-surround'
 Plug 'Valloric/YouCompleteMe'
 Plug 'tpope/vim-commentary'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 
 " Initialize plugin system
 call plug#end()
@@ -124,6 +126,13 @@ map <leader>pp :setlocal paste!<cr>
 
 " Active fzf
 map <C-p> :FZF<cr>
+
+" UltiSnips
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<C-j>"
+let g:UltiSnipsListSnippets="<C-l>"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetsDir=expand("~/.vim/UltiSnips")
 
 " Base16
 if filereadable(expand("~/.vimrc_background"))
