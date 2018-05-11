@@ -1,0 +1,10 @@
+snippet section "comment for section" b
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ${1:section}
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+endsnippet
+
+snippet iffile "check if file exits" b
+if filereadable(expand("${1:path_to_file}"))
+endif
+endsnippet
