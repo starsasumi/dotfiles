@@ -32,16 +32,8 @@ set hidden
 " Standard encoding
 set encoding=utf-8
 
-" Vim airline settings
-set laststatus=2
-let g:airline_theme='base16_3024'
-let g:airline#extensions#tabline#enabled=1
-let g:airline_powerline_fonts=1
-let g:airline_left_sep=''
-let g:airline_right_sep=''
-
 " Auto reflesh
-:set autoread
+set autoread
 
 " Tags
 set tags=./.tags;,.tags
@@ -77,7 +69,7 @@ set background=dark
 set mouse=a
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Shortcuts
+" Vanilla Shortcuts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Map leader key to space
@@ -118,23 +110,63 @@ map <leader>cc "*
 map <leader>ms :marks<cr>
 map <leader>md :delmarks 
 
-" Toggle NerdTree
-map <C-\> :NERDTreeToggle<cr>
-
 " Toggle paste mode on and off
 map <leader>pp :setlocal paste!<cr>
+
+" Copy file path and line number (for gdb)
+map <leader>% :let @* = expand("%") . ":" . line(".")<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Plugin Shortcuts
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Toggle NerdTree
+map <C-\> :NERDTreeToggle<cr>
 
 " Active fzf
 map <C-p> :FZF<cr>
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-airline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+set laststatus=2
+let g:airline_theme='base16_3024'
+let g:airline#extensions#tabline#enabled=1
+let g:airline_powerline_fonts=1
+let g:airline_left_sep=''
+let g:airline_right_sep=''
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UltiSnips
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsListSnippets="<C-l>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir=expand("~/.vim/UltiSnips")
 
-" Base16
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" YouCompleteMe
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ycm_confirm_extra_conf = 0
+let g:ycm_min_num_identifier_candidate_chars = 2
+let g:ycm_collect_identifiers_from_comments_and_strings = 1
+let g:ycm_complete_in_strings=1
+let g:ycm_server_log_level = 'info'
+let g:ycm_show_diagnostics_ui = 0
+let g:ycm_add_preview_to_completeopt = 0
+set completeopt=menu,menuone
+" Use Ctrl+Space to trigger semantic completion
+" let g:ycm_key_invoke_completion = '<c-z>'
+" noremap <c-z> <NOP>
+let g:ycm_filetype_whitelist = {'c': 1, 'cc': 1, 'cpp': 1, 'objc': 1}
+let g:ycm_semantic_triggers =  {
+           \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+           \ 'cs,lua,javascript': ['re!\w{2}'],
+           \ }
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" base16
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
