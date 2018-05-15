@@ -172,3 +172,9 @@ if filereadable(expand("~/.vimrc_background"))
   source ~/.vimrc_background
 endif
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Local configuration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if filereadable(expand("~/.vimrc.local"))
+  source ~/.vimrc.local
+endif
