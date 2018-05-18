@@ -104,7 +104,7 @@ map <leader>bo :b
 map <leader>bd :bd 
 
 " Clipboard
-map <leader>cc "*
+map <leader>cc "+
 
 " Marks
 map <leader>ms :marks<cr>
@@ -114,7 +114,7 @@ map <leader>md :delmarks
 map <leader>pp :setlocal paste!<cr>
 
 " Copy file path and line number (for gdb)
-map <leader>% :let @* = expand("%") . ":" . line(".")<cr>
+map <leader>% :let @+ = expand("%") . ":" . line(".")<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Shortcuts
@@ -156,8 +156,8 @@ let g:ycm_show_diagnostics_ui = 0
 let g:ycm_add_preview_to_completeopt = 0
 set completeopt=menu,menuone
 " Use Ctrl+Space to trigger semantic completion
-" let g:ycm_key_invoke_completion = '<c-z>'
-" noremap <c-z> <NOP>
+let g:ycm_key_invoke_completion = '<C-Space>'
+noremap <C-Space> <NOP>
 let g:ycm_filetype_whitelist = {'c': 1, 'cc': 1, 'cpp': 1, 'objc': 1}
 let g:ycm_semantic_triggers =  {
            \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
