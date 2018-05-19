@@ -12,6 +12,7 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'tpope/vim-commentary'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
+Plug 'ludovicchabant/vim-gutentags'
 
 " Initialize plugin system
 call plug#end()
@@ -163,6 +164,29 @@ let g:ycm_semantic_triggers =  {
            \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
            \ 'cs,lua,javascript': ['re!\w{2}'],
            \ }
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Gutentags
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:gutentags_project_root = ['.root', '.git', '.project', '.ycm_extra_conf.py']
+let g:gutentags_cache_dir = expand('~/.cache/tags')
+
+let g:gutentags_modules = []
+" Support ctags
+" if executable('ctags')
+"   let g:gutentags_modules += ['ctags']
+"   let g:gutentags_ctags_tagfile = '.tags'
+"   let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
+"   let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
+"   let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
+" endif
+
+" Support gtags (GNU Global) through vim's cscope interface
+if executable('gtags-cscope') && executable('gtags')
+  set cscopeprg=gtags-cscope
+  let g:gutentags_modules += ['gtags_cscope']
+  let g:gutentags_auto_add_gtags_cscope = 1
+endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " base16
