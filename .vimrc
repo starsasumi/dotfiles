@@ -16,6 +16,8 @@ Plug 'ludovicchabant/vim-gutentags'
 
 " Initialize plugin system
 call plug#end()
+" In order to be able to override vim-sensible's settings, we load it first
+runtime plugin/sensible.vim
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -83,48 +85,51 @@ nnoremap <C-k> <C-W>k
 nnoremap <C-h> <C-W>h
 nnoremap <C-l> <C-W>l
 
+" no more :
+nnoremap <leader><leader> :
+
 " fast saving
-nmap <leader>w :w!<cr>
-nmap <leader>q :q<cr>
-nmap <leader>wq :wq<cr>
+nnoremap <leader>w :w!<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader>wq :wq<cr>
 
 " Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>te :tabedit 
-map <leader>tm :tabmove
+nnoremap <leader>tn :tabnew<cr>
+nnoremap <leader>to :tabonly<cr>
+nnoremap <leader>tc :tabclose<cr>
+nnoremap <leader>te :tabedit 
+nnoremap <leader>tm :tabmove
 
 " Treat long lines as break lines (useful when moving around in them)
-map j gj
-map k gk
+noremap j gj
+noremap k gk
 
 " Buffers
-map <leader>bb :buffers<cr>
-map <leader>bo :b 
-map <leader>bd :bd 
+nnoremap <leader>bb :buffers<cr>
+nnoremap <leader>bo :b 
+nnoremap <leader>bd :bd 
 
 " Clipboard
 map <leader>cc "+
 
 " Marks
-map <leader>ms :marks<cr>
-map <leader>md :delmarks 
+nnoremap <leader>ms :marks<cr>
+nnoremap <leader>md :delmarks 
 
 " Toggle paste mode on and off
-map <leader>pp :setlocal paste!<cr>
+nnoremap <leader>pp :setlocal paste!<cr>
 
 " Copy file path and line number (for gdb)
-map <leader>% :let @+ = expand("%") . ":" . line(".")<cr>
+nnoremap <leader>% :let @+ = expand("%") . ":" . line(".")<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Shortcuts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Toggle NerdTree
-map <C-\> :NERDTreeToggle<cr>
+nnoremap <C-\> :NERDTreeToggle<cr>
 
 " Active fzf
-map <C-p> :FZF<cr>
+nnoremap <C-p> :FZF<cr>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-airline
