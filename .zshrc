@@ -85,7 +85,12 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # Set aliases
-alias ls="ls -BG --color=auto"
+case `uname` in
+  Darwin)
+    alias ls="ls -BG" ;;
+  Linux)
+    alias ls="ls -BG --color=auto" ;;
+esac
 alias ll="ls -l"
 
 # Dotfiles repo
