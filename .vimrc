@@ -75,23 +75,35 @@ set mouse=a
 " Vanilla Shortcuts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" Map leader key to space
+" Map leader key to <Space>
 let mapleader = " "
 let g:mapleader = " "
 
-" switching splits
+" No more :
+nnoremap <leader><leader> :
+
+" Do not open command-line window when I quit too fast. See `:help q:`
+nnoremap q: <NOP>
+
+" Fast saving
+nnoremap <leader>w :w!<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader>wq :wq<cr>
+
+" Moveing around
+noremap H ^
+noremap L $
+" Treat long lines as break lines (useful when moving around in them)
+noremap j gj
+noremap k gk
+
+" Switching splits
+nnoremap <leader>sp :split<cr>
+nnoremap <leader>vs :vsplit<cr>
 nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
 nnoremap <C-h> <C-W>h
 nnoremap <C-l> <C-W>l
-
-" no more :
-nnoremap <leader><leader> :
-
-" fast saving
-nnoremap <leader>w :w!<cr>
-nnoremap <leader>q :q<cr>
-nnoremap <leader>wq :wq<cr>
 
 " Useful mappings for managing tabs
 nnoremap <leader>tn :tabnew<cr>
@@ -100,19 +112,10 @@ nnoremap <leader>tc :tabclose<cr>
 nnoremap <leader>te :tabedit 
 nnoremap <leader>tm :tabmove
 
-noremap H ^
-noremap L $
-" Treat long lines as break lines (useful when moving around in them)
-noremap j gj
-noremap k gk
-
 " Buffers
 nnoremap <leader>bb :buffers<cr>
 nnoremap <leader>bo :b 
 nnoremap <leader>bd :bd 
-
-" Clipboard
-map <leader>cc "+
 
 " Marks
 nnoremap <leader>ms :marks<cr>
@@ -121,6 +124,8 @@ nnoremap <leader>md :delmarks
 " Toggle paste mode on and off
 nnoremap <leader>pp :setlocal paste!<cr>
 
+" Clipboard
+map <leader>cc "+
 " Copy file path and line number (for gdb)
 nnoremap <leader>% :let @+ = expand("%") . ":" . line(".")<cr>
 
@@ -171,7 +176,6 @@ let g:ycm_add_preview_to_completeopt = 0
 set completeopt=menu,menuone
 " Use Ctrl+Space to trigger semantic completion
 let g:ycm_key_invoke_completion = '<C-Space>'
-noremap <C-Space> <NOP>
 let g:ycm_filetype_whitelist = {'c': 1, 'cc': 1, 'cpp': 1, 'objc': 1}
 let g:ycm_semantic_triggers =  {
            \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
