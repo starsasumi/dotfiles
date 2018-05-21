@@ -100,6 +100,8 @@ nnoremap <leader>tc :tabclose<cr>
 nnoremap <leader>te :tabedit 
 nnoremap <leader>tm :tabmove
 
+noremap H ^
+noremap L $
 " Treat long lines as break lines (useful when moving around in them)
 noremap j gj
 noremap k gk
@@ -121,6 +123,12 @@ nnoremap <leader>pp :setlocal paste!<cr>
 
 " Copy file path and line number (for gdb)
 nnoremap <leader>% :let @+ = expand("%") . ":" . line(".")<cr>
+
+" Quote a word
+nnoremap <leader>' viw<Esc>a'<Esc>bi'<Esc>lel
+nnoremap <leader>" viw<Esc>a"<Esc>bi"<Esc>lel
+vnoremap <leader>' <Esc>`<i'<Esc>`>a'<Esc>
+vnoremap <leader>" <Esc>`<i"<Esc>`>a"<Esc>
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Shortcuts
