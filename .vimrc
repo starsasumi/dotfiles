@@ -59,6 +59,7 @@ set backspace=indent,eol,start
 set ai "Auto indent
 set si "Smart indent
 set wrap "Wrap lines
+set colorcolumn=80 " show column 80
 
 " Search settings
 set ignorecase          " case insensitive searching
@@ -85,10 +86,9 @@ nnoremap <leader><leader> :
 " Do not open command-line window when I quit too fast. See `:help q:`
 nnoremap q: <NOP>
 
-" Fast saving
-nnoremap <leader>w :w!<cr>
+" Fast saving and quitting
+nnoremap <leader>w :w<cr>
 nnoremap <leader>q :q<cr>
-nnoremap <leader>wq :wq<cr>
 
 " Moveing around
 noremap H ^
@@ -115,7 +115,7 @@ nnoremap <leader>tm :tabmove
 " Buffers
 nnoremap <leader>bb :buffers<cr>
 nnoremap <leader>bo :b 
-nnoremap <leader>bd :bd 
+nnoremap <leader>bd :bd<cr>
 
 " Marks
 nnoremap <leader>ms :marks<cr>
@@ -135,14 +135,28 @@ nnoremap <leader>" viw<Esc>a"<Esc>bi"<Esc>lel
 vnoremap <leader>' <Esc>`<i'<Esc>`>a'<Esc>
 vnoremap <leader>" <Esc>`<i"<Esc>`>a"<Esc>
 
+" Search selected text
+" BTW, you can search word under cursor with * and #
+vnoremap / y/<C-r>"<cr>
+vnoremap ? y?<C-r>"<cr>
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Plugin Shortcuts
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Toggle NerdTree
 nnoremap <C-\> :NERDTreeToggle<cr>
 
+" YCM
+nnoremap <F3> :YcmCompleter GoTo<cr>
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" fzf
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Active fzf
 nnoremap <C-p> :FZF<cr>
+" Only search for tracked file
+let $FZF_DEFAULT_COMMAND = 'git ls-files --recurse-submodules'
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " vim-airline
@@ -150,9 +164,12 @@ nnoremap <C-p> :FZF<cr>
 set laststatus=2
 let g:airline_theme='base16_3024'
 let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts=1
 let g:airline_left_sep=''
 let g:airline_right_sep=''
+let g:airline#extensions#tabline#left_alt_sep = '|'
+let g:airline#extensions#tabline#right_alt_sep = '|'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " UltiSnips
@@ -178,9 +195,9 @@ set completeopt=menu,menuone
 let g:ycm_key_invoke_completion = '<C-Space>'
 let g:ycm_filetype_whitelist = {'c': 1, 'cc': 1, 'cpp': 1, 'objc': 1}
 let g:ycm_semantic_triggers =  {
-           \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-           \ 'cs,lua,javascript': ['re!\w{2}'],
-           \ }
+  \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
+  \ 'cs,lua,javascript': ['re!\w{2}'],
+\ }
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Gutentags
@@ -204,6 +221,9 @@ if executable('gtags-cscope') && executable('gtags')
   let g:gutentags_modules += ['gtags_cscope']
   let g:gutentags_auto_add_gtags_cscope = 1
 endif
+
+" Only generate tags for tracked files
+let g:gutentags_file_list_command = 'git ls-files --recurse-submodules'
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " base16
