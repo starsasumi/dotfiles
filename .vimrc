@@ -1,4 +1,6 @@
-set nocompatible	" use vim settings
+" # Plug {{{
+" ---------------------------------------------------------
+set nocompatible " use vim settings
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-sensible'
@@ -18,70 +20,56 @@ Plug 'ludovicchabant/vim-gutentags'
 call plug#end()
 " In order to be able to override vim-sensible's settings, we load it first
 runtime plugin/sensible.vim
+" }}}
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Editor settings
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Switch syntax highlighting on
-syntax enable
-
-" Show line numbers
-set number
-
-" Allow hidden buffers, don't limit to 1 file per window/split
-set hidden
-
-" Standard encoding
-set encoding=utf-8
-
-" Auto reflesh
-set autoread
-
-" Tags
-set tags=./.tags;,.tags
+" # Basic settings {{{
+" ---------------------------------------------------------
+syntax enable  " Switch syntax highlighting on
+set number  " Show line numbers
+set hidden  " Allow hidden buffers, don't limit to 1 file per window/split
+set encoding=utf-8  " Standard encoding
+set autoread  " Auto reflesh
+set tags=./.tags;,.tags  " Tags
+set mouse=a  " Allow scrolling
+set smarttab  " Be smart when using tabs ;)
+set backspace=indent,eol,start  " Make backspace behave in a sane manner.
 
 " Use 2 spaces instead of tab for indention
 set expandtab
 set shiftwidth=2
 set softtabstop=2
 
-" Be smart when using tabs ;)
-set smarttab
-
 " Linebreak on 500 characters
-set lbr
-set tw=500
+set linebreak
+set textwidth=500
+set colorcolumn=80 " highlight column 80
 
-" Make backspace behave in a sane manner.
-set backspace=indent,eol,start
-
-set ai "Auto indent
-set si "Smart indent
-set wrap "Wrap lines
-set colorcolumn=80 " show column 80
+set autoindent
+set smartindent
+set wrap
 
 " Search settings
-set ignorecase          " case insensitive searching
-set smartcase           " but become case sensitive if you type uppercase characters
-set magic               " change the way backslashes are used in search patterns
+set ignorecase      " case insensitive searching
+set smartcase       " but become case sensitive if you type uppercase characters
+set magic           " change the way backslashes are used in search patterns
 set incsearch
 set hlsearch
 set background=dark
+" }}}
 
-" Allow scrolling
-set mouse=a
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Vanilla Shortcuts
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
-" Map leader key to <Space>
+" # Basic shortcuts {{{
+" ---------------------------------------------------------
+" Map leader to <Space> and local leader to ,
 let mapleader = " "
 let g:mapleader = " "
+let maplocalleader = ","
+let g:maplocalleader = ","
 
 " No more :
 nnoremap <leader><leader> :
+
+"help
+nnoremap <leader>h :help 
 
 " Do not open command-line window when I quit too fast. See `:help q:`
 nnoremap q: <NOP>
@@ -125,7 +113,7 @@ nnoremap <leader>md :delmarks
 nnoremap <leader>pp :setlocal paste!<cr>
 
 " Clipboard
-map <leader>cc "+
+nnoremap <leader>cc "+
 " Copy file path and line number (for gdb)
 nnoremap <leader>% :let @+ = expand("%") . ":" . line(".")<cr>
 
@@ -139,28 +127,36 @@ vnoremap <leader>" <Esc>`<i"<Esc>`>a"<Esc>
 " BTW, you can search word under cursor with * and #
 vnoremap / y/<C-r>"<cr>
 vnoremap ? y?<C-r>"<cr>
+" }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Plugin Shortcuts
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" # vimscript {{{
+" ---------------------------------------------------------
+augroup filetype_vim
+  autocmd!
+  autocmd FileType vim setlocal foldmethod=marker
+augroup END
+" }}}
+
+" # Plugin Shortcuts {{{
+" ---------------------------------------------------------
 " Toggle NerdTree
 nnoremap <C-\> :NERDTreeToggle<cr>
 
 " YCM
 nnoremap <F3> :YcmCompleter GoTo<cr>
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " fzf
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Active fzf
 nnoremap <C-p> :FZF<cr>
+" }}}
+
+" # fzf {{{
+" ---------------------------------------------------------
 " Only search for tracked file
 let $FZF_DEFAULT_COMMAND = 'git ls-files --recurse-submodules'
+" }}}
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" vim-airline
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" # vim-airline {{{
+" ---------------------------------------------------------
 set laststatus=2
 let g:airline_theme='base16_3024'
 let g:airline#extensions#tabline#enabled=1
@@ -170,19 +166,19 @@ let g:airline_left_sep=''
 let g:airline_right_sep=''
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#right_alt_sep = '|'
+" }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" UltiSnips
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" # UltiSnips {{{
+" ---------------------------------------------------------
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<C-j>"
 let g:UltiSnipsListSnippets="<C-l>"
 let g:UltiSnipsEditSplit="vertical"
 let g:UltiSnipsSnippetsDir=expand("~/.vim/UltiSnips")
+" }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" YouCompleteMe
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" # YouCompleteMe {{{
+" ---------------------------------------------------------
 let g:ycm_confirm_extra_conf = 0
 let g:ycm_min_num_identifier_candidate_chars = 2
 let g:ycm_collect_identifiers_from_comments_and_strings = 1
@@ -198,10 +194,10 @@ let g:ycm_semantic_triggers =  {
   \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
   \ 'cs,lua,javascript': ['re!\w{2}'],
 \ }
+" }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Gutentags
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" # Gutentags {{{
+" ---------------------------------------------------------
 let g:gutentags_project_root = ['.root', '.git', '.project', '.ycm_extra_conf.py']
 let g:gutentags_cache_dir = expand('~/.cache/tags')
 
@@ -224,18 +220,19 @@ endif
 
 " Only generate tags for tracked files
 let g:gutentags_file_list_command = 'git ls-files --recurse-submodules'
+" }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" base16
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" # base16 {{{
+" ---------------------------------------------------------
 if filereadable(expand("~/.vimrc_background"))
   let base16colorspace=256
   source ~/.vimrc_background
 endif
+" }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Local configuration
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" # Local configuration {{{
+" ---------------------------------------------------------
 if filereadable(expand("~/.vimrc.local"))
   source ~/.vimrc.local
 endif
+" }}}
