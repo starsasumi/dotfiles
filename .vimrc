@@ -14,7 +14,7 @@ Plug 'Valloric/YouCompleteMe'
 Plug 'tpope/vim-commentary'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'ludovicchabant/vim-gutentags'
+Plug 'zivyangll/git-blame.vim'
 
 " Initialize plugin system
 call plug#end()
@@ -55,6 +55,26 @@ set magic           " change the way backslashes are used in search patterns
 set incsearch
 set hlsearch
 set background=dark
+
+set mouse=a " Allow scrolling
+
+" gVim
+if has('gui_running')
+  set guifont="Input Mono Light 9"
+  set guioptions-=m
+  set guioptions-=r
+  set guioptions-=T
+  set guioptions-=t
+  set guioptions-=g
+  set guioptions-=L
+endif
+
+" vimscript
+augroup filetype_vim
+  autocmd!
+  autocmd FileType vim setlocal foldmethod=marker
+augroup END
+
 " }}}
 
 " # Basic shortcuts {{{
@@ -86,8 +106,8 @@ noremap j gj
 noremap k gk
 
 " Switching splits
-nnoremap <leader>sp :split<cr>
-nnoremap <leader>vs :vsplit<cr>
+nnoremap <leader>sp :split 
+nnoremap <leader>vs :vsplit 
 nnoremap <C-j> <C-W>j
 nnoremap <C-k> <C-W>k
 nnoremap <C-h> <C-W>h
@@ -127,14 +147,7 @@ vnoremap <leader>" <Esc>`<i"<Esc>`>a"<Esc>
 " BTW, you can search word under cursor with * and #
 vnoremap / y/<C-r>"<cr>
 vnoremap ? y?<C-r>"<cr>
-" }}}
-
-" # vimscript {{{
-" ---------------------------------------------------------
-augroup filetype_vim
-  autocmd!
-  autocmd FileType vim setlocal foldmethod=marker
-augroup END
+nnoremap <leader><Esc> :nohlsearch<cr><Esc>
 " }}}
 
 " # Plugin Shortcuts {{{
@@ -159,7 +172,7 @@ let $FZF_DEFAULT_COMMAND = 'git ls-files --recurse-submodules'
 " ---------------------------------------------------------
 set laststatus=2
 let g:airline_theme='base16_3024'
-let g:airline#extensions#tabline#enabled=1
+let g:airline#extensions#tabline#enabled = !(has('gui_running'))
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline_powerline_fonts=1
 let g:airline_left_sep=''
@@ -194,32 +207,6 @@ let g:ycm_semantic_triggers =  {
   \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
   \ 'cs,lua,javascript': ['re!\w{2}'],
 \ }
-" }}}
-
-" # Gutentags {{{
-" ---------------------------------------------------------
-let g:gutentags_project_root = ['.root', '.git', '.project', '.ycm_extra_conf.py']
-let g:gutentags_cache_dir = expand('~/.cache/tags')
-
-let g:gutentags_modules = []
-" Support ctags
-" if executable('ctags')
-"   let g:gutentags_modules += ['ctags']
-"   let g:gutentags_ctags_tagfile = '.tags'
-"   let g:gutentags_ctags_extra_args = ['--fields=+niazS', '--extra=+q']
-"   let g:gutentags_ctags_extra_args += ['--c++-kinds=+px']
-"   let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
-" endif
-
-" Support gtags (GNU Global) through vim's cscope interface
-if executable('gtags-cscope') && executable('gtags')
-  set cscopeprg=gtags-cscope
-  let g:gutentags_modules += ['gtags_cscope']
-  let g:gutentags_auto_add_gtags_cscope = 1
-endif
-
-" Only generate tags for tracked files
-let g:gutentags_file_list_command = 'git ls-files --recurse-submodules'
 " }}}
 
 " # base16 {{{
