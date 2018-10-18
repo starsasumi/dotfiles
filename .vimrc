@@ -148,6 +148,9 @@ vnoremap <leader>" <Esc>`<i"<Esc>`>a"<Esc>
 vnoremap / y/<C-r>"<cr>
 vnoremap ? y?<C-r>"<cr>
 nnoremap <leader><Esc> :nohlsearch<cr><Esc>
+
+" Find & Replace the word under cursor
+nnoremap <C-F2> :%s/\<<C-R><C-W>\>/<C-R><C-W>/gc
 " }}}
 
 " # Plugin Shortcuts {{{
