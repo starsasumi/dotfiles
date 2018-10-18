@@ -101,10 +101,16 @@ if (( $+commands[nvim] )) ; then
     alias vim="nvim"
 fi
 
+# gVim
+if (( $+commands[gvim] )) ; then
+  alias gvim="gvim $@ &> /dev/null"
+  alias gt="gvim --remote-tab-silent"
+fi
+
 # Base 16
 BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
-base16_summerfruit-dark # set colors
+[ -z $VIM ] && [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+[ -z $VIM ] && base16_3024 # set colors
 
 # Custom scripts
 PATH="$HOME/.config/scripts:$PATH"
