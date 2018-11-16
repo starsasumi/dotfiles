@@ -89,7 +89,7 @@ case `uname` in
   Darwin)
     alias ls="ls -BG" ;;
   Linux)
-    alias ls="ls -BG --color=auto" ;;
+    alias ls="ls -B --color=auto" ;;
 esac
 alias ll="ls -l"
 
