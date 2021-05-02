@@ -15,6 +15,7 @@ Plug 'tpope/vim-commentary'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'zivyangll/git-blame.vim'
+Plug 'airblade/vim-gitgutter'
 
 " Initialize plugin system
 call plug#end()
@@ -58,6 +59,17 @@ set background=dark
 
 set mouse=a " Allow scrolling
 
+" " Netrw
+" let g:netrw_banner = 0
+" let g:netrw_liststyle = 3
+" let g:netrw_browse_split = 4
+" let g:netrw_altv = 1
+" let g:netrw_winsize = 25
+" augroup ProjectDrawer
+"   autocmd!
+"   autocmd VimEnter * :Vexplore
+" augroup END
+
 " gVim
 if has('gui_running')
   set guifont="Input Mono Light 9"
@@ -97,6 +109,7 @@ nnoremap q: <NOP>
 " Fast saving and quitting
 nnoremap <leader>w :w<cr>
 nnoremap <leader>q :q<cr>
+" nnoremap <C-w> :q<cr>
 
 " Moveing around
 noremap H ^
@@ -129,6 +142,18 @@ nnoremap <leader>bd :bd<cr>
 nnoremap <leader>ms :marks<cr>
 nnoremap <leader>md :delmarks 
 
+" Go to tab by number
+noremap <leader>1 1gt
+noremap <leader>2 2gt
+noremap <leader>3 3gt
+noremap <leader>4 4gt
+noremap <leader>5 5gt
+noremap <leader>6 6gt
+noremap <leader>7 7gt
+noremap <leader>8 8gt
+noremap <leader>9 9gt
+noremap <leader>0 :tablast<cr>
+
 " Toggle paste mode on and off
 nnoremap <leader>pp :setlocal paste!<cr>
 
@@ -156,7 +181,7 @@ nnoremap <C-F2> :%s/\<<C-R><C-W>\>/<C-R><C-W>/gc
 " # Plugin Shortcuts {{{
 " ---------------------------------------------------------
 " Toggle NerdTree
-nnoremap <C-\> :NERDTreeToggle<cr>
+nnoremap <C-\> :NERDTreeToggle %<cr>
 
 " YCM
 nnoremap <F3> :YcmCompleter GoTo<cr>
@@ -169,6 +194,8 @@ nnoremap <C-p> :FZF<cr>
 " ---------------------------------------------------------
 " Only search for tracked file
 let $FZF_DEFAULT_COMMAND = 'git ls-files --recurse-submodules'
+" Enable history. Use <C-P> and <C-N> to navigate through histories
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 " }}}
 
 " # vim-airline {{{
@@ -210,6 +237,11 @@ let g:ycm_semantic_triggers =  {
   \ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
   \ 'cs,lua,javascript': ['re!\w{2}'],
 \ }
+" }}}
+
+" # NERDTree {{{
+" ---------------------------------------------------------
+:let g:NERDTreeWinSize=60
 " }}}
 
 " # base16 {{{

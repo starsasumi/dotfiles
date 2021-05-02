@@ -1,4 +1,22 @@
-snippet ns "namespace" bs
+snippet ns "namespace" b
 namespace $1{
 }  // namespace${1/\s*([\w\d]+)?\s*/(?1: $1)/}
+endsnippet
+
+
+snippet class "Delete a non-movable/copiable class" b
+class ${1} {
+ public:
+  $1();
+  $1(const $1&) = delete;
+  $1& operator=(const $1&) = delete;
+  virtual ~$1() = default;
+
+ private:
+};
+endsnippet
+
+snippet mops "Declare move operators for a class"
+$1($1&&) = default;
+$1& operator=($1&&) = default;
 endsnippet
